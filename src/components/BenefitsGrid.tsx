@@ -23,7 +23,15 @@ const benefits: BenefitCard[] = [
   {
     image: experienceCare,
     title: "Leverage Your Existing Experience",
-    description: "Use your years of care home, palliative care, nursing home, or home visit experience to build your own practice - without starting from scratch.",
+    description: `Use your years of care home, palliative care, nursing home, or home-visit experience to build your own practice without starting from scratch.
+Turn your free time into meaningful service that genuinely helps people in need.
+Make a positive impact on society by supporting families who depend on reliable, compassionate care.
+Give back to your community while earning for the skills you’ve spent years perfecting.
+Become a trusted pillar of support for seniors, patients with chronic conditions, and those seeking comfort.
+                                                                                              
+Experience the satisfaction of seeing lives improve because of your presence and expertise.
+Grow professionally while contributing to a healthier, safer, and more supported society.
+Empower yourself, uplift others, and join a movement that brings care closer to every home `,
     size: "large",
     badges: [
       { text: "No Startup Costs", style: "bg-primary/10 border border-primary/20 text-primary" },
@@ -33,13 +41,16 @@ const benefits: BenefitCard[] = [
   {
     image: medicalTech,
     title: "Modern Technology, No Overhead for Basic Care",
-    description: "Get access to AI-assisted diagnostics, Point-of-Care testing devices, and telemedicine connectivity. Start with our basic kit at no overhead cost.",
+    description: `Get access to AI-assisted diagnostics, Point-of-Care testing devices, and telemedicine connectivity. 
+Use AI-assisted diagnostics, Point-of-Care testing devices, and instant telemedicine connectivity to deliver accurate care.
+Our basic kit comes with essential tools that help you diagnose, monitor, and treat patients efficiently.
+`,
     size: "medium",
   },
   {
     image: patientRelationship,
     title: "Keep Your Patients for Life",
-    description: "Build real relationships that last. Your patients stay YOUR patients. Provide continuous care and earn recurring income from those who trust you most.",
+    description: "Build real relationships that last. Your patients stay YOUR patients. Provide continuous care and earn recurring income from those who trust you most. Provide personalized care at your own pace — flexible, fulfilling, and deeply rewarding Start with our basic kit at no overhead cost Access modern medical technology without any upfront burden.",
     size: "medium",
   },
   {
@@ -88,69 +99,46 @@ export const BenefitsGrid = () => {
 
   useEffect(() => {
     // Simulate loading
-    const timer = setTimeout(() => setLoading(false), 500);
+    const timer = setTimeout(() => setLoading(false), 20);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    if (loading || !sectionRef.current) return;
+  if (loading || !sectionRef.current) return;
 
-    const ctx = gsap.context(() => {
-      // Row 1 animation - grouped ease-in
-      if (row1Ref.current) {
-        const row1Cards = row1Ref.current.querySelectorAll(".benefit-card");
-        gsap.fromTo(
-          row1Cards,
-          {
-            opacity: 0,
-            y: 50,
-            scale: 0.96,
+  const ctx = gsap.context(() => {
+    const animateRow = (row: HTMLDivElement | null) => {
+      if (!row) return;
+      const cards = row.querySelectorAll(".benefit-card");
+
+      gsap.fromTo(
+        cards,
+        {
+          opacity: 0,
+          y: 20,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.45,
+          ease: "power3.out",
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: row,
+            start: "top 90%",
+            toggleActions: "play none none none",
           },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: "power2.out",
-            stagger: 0.12,
-            scrollTrigger: {
-              trigger: row1Ref.current,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
+        }
+      );
+    };
 
-      // Row 2 animation - grouped ease-in
-      if (row2Ref.current) {
-        const row2Cards = row2Ref.current.querySelectorAll(".benefit-card");
-        gsap.fromTo(
-          row2Cards,
-          {
-            opacity: 0,
-            y: 50,
-            scale: 0.96,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: "power2.out",
-            stagger: 0.12,
-            scrollTrigger: {
-              trigger: row2Ref.current,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-    }, sectionRef);
+    animateRow(row1Ref.current);
+    animateRow(row2Ref.current);
+  }, sectionRef);
 
-    return () => ctx.revert();
-  }, [loading]);
+  return () => ctx.revert();
+}, [loading]);
+
 
   const getSizeClasses = (size: "large" | "medium" | "small") => {
     switch (size) {
@@ -193,10 +181,13 @@ export const BenefitsGrid = () => {
         {benefits.slice(0, 2).map((benefit, index) => (
           <div
             key={index}
-            className={`benefit-card group ${getSizeClasses(benefit.size)} rounded-3xl border-2 border-border/50 
-              bg-card hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10
-              transition-all duration-500 backdrop-blur-sm
-              relative overflow-hidden`}
+         className={`benefit-card group ${getSizeClasses(benefit.size)}
+relative overflow-hidden rounded-3xl 
+border border-white/10 bg-card/80 backdrop-blur-xl
+shadow-xl shadow-black/20
+hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1
+transition-all duration-300`}
+
           >
             {/* Image Overlay */}
             <div className="absolute inset-0">
@@ -234,10 +225,13 @@ export const BenefitsGrid = () => {
         {benefits.slice(2).map((benefit, index) => (
           <div
             key={index}
-            className={`benefit-card group ${getSizeClasses(benefit.size)} rounded-3xl border-2 border-border/50 
-              bg-card hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10
-              transition-all duration-500 backdrop-blur-sm
-              relative overflow-hidden`}
+          className={`benefit-card group ${getSizeClasses(benefit.size)}
+relative overflow-hidden rounded-3xl 
+border border-white/10 bg-card/80 backdrop-blur-xl
+shadow-xl shadow-black/20
+hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1
+transition-all duration-300`}
+
           >
             {/* Image Overlay */}
             <div className="absolute inset-0">

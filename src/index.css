@@ -105,6 +105,35 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
+.neon-edge {
+  position: relative;
+}
+
+.neon-edge::before,
+.neon-edge::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.neon-edge::before {
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary), transparent);
+  filter: drop-shadow(0 0 6px var(--primary));
+}
+
+.neon-edge::after {
+  right: 0;
+  bottom: 0;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(to left, var(--primary), transparent);
+  filter: drop-shadow(0 0 6px var(--primary));
+}
+
 
 @layer base {
   * {
