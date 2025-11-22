@@ -1,7 +1,7 @@
 export const careManagerContent = {
   hero: {
     badge: "For Experienced Care Professionals",
-    headline: "You're Already a Care Expert.",
+    headline: "You're Already a Care professionals.",
     headlineHighlight: "Now Earn What You Deserve.",
     subheadline: "Become a Telth Care Manager and turn your care experience into your own independent practice",
     description: "Working at a care home, nursing facility, or already doing home visits? Your years of experience deserve better compensation and the freedom to build your own client base. Start with no overhead for basic care. Just your expertise and our platform.",

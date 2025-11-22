@@ -27,7 +27,7 @@ import telthLogo from "@/assets/telth-logo.svg";
 
 const Index = () => {
   const [activeCategory, setActiveCategory] = useState<"ccm-cm" | "doctor">("ccm-cm");
-  
+
   const content = activeCategory === "ccm-cm" ? careManagerContent : doctorContent;
 
   const scrollToForm = () => {
@@ -45,14 +45,20 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <img src={telthLogo} alt="Telth.Care" className="h-8" />
-            <Button onClick={scrollToForm} variant="default" size="sm">
+            <Button
+              onClick={scrollToForm}
+              variant="default"
+              size="sm"
+              className="hidden md:flex"
+            >
               Become a Care Manager
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
+
           </div>
         </div>
       </nav>
-      
+
       {/* <CategorySwitcher activeCategory={activeCategory} onCategoryChange={setActiveCategory} /> */}
       {/* Hero Section */}
       <section className="relative overflow-hidden">
@@ -60,8 +66,8 @@ const Index = () => {
         <div className="container mx-auto px-6 lg:px-8 pt-2 pb-20 lg:pb-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 z-10">
-              <div className="inline-block">
-                <span className="bg-secondary/10 text-secondary px-4 py-2 rounded-full text-sm font-semibold">
+              <div className="inline-block mt-3">
+                <span className="bg-[#0805041A] text-secondary px-4 py-2 rounded-full text-sm font-semibold">
                   {content.hero.badge}
                 </span>
               </div>
@@ -163,7 +169,7 @@ const Index = () => {
               {activeCategory === "ccm-cm" ? "From Care Home Salary to Care Manager Income" : "Expand Your Practice, Increase Your Earnings"}
             </h2>
             <p className="text-xl text-muted-foreground">
-              {activeCategory === "ccm-cm" 
+              {activeCategory === "ccm-cm"
                 ? "See what your experience is actually worth as a Telth Care Manager"
                 : "See your earning potential as a Telth Doctor"}
             </p>
@@ -349,7 +355,7 @@ const Index = () => {
               {content.finalCTA.headline}
             </h2>
             <p className="text-xl leading-relaxed opacity-90">
-              {activeCategory === "ccm-cm" 
+              {activeCategory === "ccm-cm"
                 ? "Every shift at the care home, every night with palliative patients, every home visit you've made - it's built something valuable. Your skills. Your compassion. Your reputation."
                 : "Every consultation, every diagnosis, every patient you've helped - it's built your expertise. Your knowledge. Your reputation."}
             </p>
@@ -396,7 +402,7 @@ const Index = () => {
                   <p className="text-sm opacity-80">www.mytelth.com</p>
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <h4 className="font-semibold text-lg mb-4">UK Office</h4>
                 <p className="text-sm opacity-80">Suite 14, Ditton Park,</p>
@@ -404,7 +410,7 @@ const Index = () => {
                 <p className="text-sm opacity-80">Slough - SL3 9LL, UK</p>
                 <p className="text-sm opacity-80 mt-3">Phone: +44 7554 469843</p>
               </div>
-              
+
               <div className="space-y-2">
                 <h4 className="font-semibold text-lg mb-4">USA Office</h4>
                 <p className="text-sm opacity-80">Suite 400, 909 Rose Ave,</p>
@@ -412,7 +418,7 @@ const Index = () => {
                 <p className="text-sm opacity-80">20852, USA</p>
                 <p className="text-sm opacity-80 mt-3">Phone: +1 (234) 564-4564</p>
               </div>
-              
+
               <div className="space-y-2">
                 <h4 className="font-semibold text-lg mb-4">India Office</h4>
                 <p className="text-sm opacity-80">The Chambers Vardhaman</p>
@@ -422,7 +428,7 @@ const Index = () => {
                 <p className="text-sm opacity-80 mt-3">Phone: 1800-570-0140</p>
               </div>
             </div>
-            
+
             <div className="text-center">
               <Button
                 variant="outline"
@@ -433,7 +439,7 @@ const Index = () => {
               </Button>
             </div>
           </div>
-          
+
           <div className="mt-8 pt-8 border-t border-background/20 text-center text-sm opacity-60">
             <p>© 2025 Telth.Care. All rights reserved.</p>
           </div>
