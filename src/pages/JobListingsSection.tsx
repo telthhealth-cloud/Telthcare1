@@ -168,7 +168,7 @@ const JobListingsSection = ({
     e.stopPropagation(); // Prevent card click
     
     // Build application URL with job details
-    const applicationUrl = new URL('https://careers.mytelth.com');
+    const applicationUrl = new URL('https://careers.mytelth.com/careers/Application');
     applicationUrl.searchParams.set('jobId', job._id);
     applicationUrl.searchParams.set('jobTitle', job.title);
     
