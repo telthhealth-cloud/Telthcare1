@@ -57,7 +57,7 @@ const JobDetailPage = () => {
         fetchJobDetail();
     }, [id]);
      
-    const base_url = 'https://careers.mytelth.com'
+    const base_url = 'https://api.mytelth.com'
     // const base_url = 'http://192.168.1.47:8080'
     const fetchJobDetail = async () => {
         try {

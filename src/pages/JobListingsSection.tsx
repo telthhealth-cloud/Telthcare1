@@ -61,7 +61,7 @@ const JobListingsSection = ({
         filterJobs();
     }, [jobs, searchTerm, selectedType, selectedLocation, selectedDepartment]);
 
-    const base_url = 'https://careers.mytelth.com'
+    const base_url = 'https://api.mytelth.com'
     // const base_url = 'http://192.168.1.47:8080'
 
     const fetchJobs = async () => {
