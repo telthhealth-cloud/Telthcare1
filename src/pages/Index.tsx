@@ -33,6 +33,7 @@ import { cityTiers } from "../data/cityTiers";
 import RevenueStreamsSection from "@/components/revenueStream";
 import JobListingsSection from "./JobListingsSection";
 import telthLogo from "@/assets/telth-logo.svg";
+import { BenefitsGrid } from "@/components/BenefitsGrid";
 
 const BentoSkeleton = () => (
   <div className="h-full flex flex-col p-6 animate-pulse">
@@ -299,24 +300,49 @@ const Index = () => {
           box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
       `}</style>
-      <CategorySwitcher activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+       {/* Navigation Header */}
+      <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <img src={telthLogo} alt="Telth.Care" className="h-8" />
+            <Button
+              onClick={scrollToForm}
+              variant="default"
+              size="sm"
+              className="hidden md:flex"
+            >
+              Become a Care Manager
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+
+          </div>
+        </div>
+      </nav>
+
+      {/* <CategorySwitcher activeCategory={activeCategory} onCategoryChange={setActiveCategory} /> */}
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
-        <div className="container mx-auto px-4 py-20 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-8 pt-2 pb-20 lg:pb-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 z-10">
-              <div className="inline-block">
-                <span className="bg-secondary/10 text-secondary px-4 py-2 rounded-full text-sm font-semibold">
+              <div className="inline-block mt-3">
+                <span className="bg-[#0805041A] text-secondary px-4 py-2 rounded-full text-sm font-semibold">
                   {content.hero.badge}
                 </span>
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
                 {content.hero.headline}{" "}
-                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{content.hero.headlineHighlight}</span>
+                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  {content.hero.headlineHighlight}
+                </span>
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">{content.hero.subheadline}</p>
-              <p className="text-lg text-foreground/80">{content.hero.description}</p>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                {content.hero.subheadline}
+              </p>
+              <p className="text-lg text-foreground/80">
+                {content.hero.description}
+              </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button variant="hero" size="lg" onClick={scrollToForm} className="text-lg px-8">
                   {content.hero.primaryCTA}
@@ -332,7 +358,7 @@ const Index = () => {
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-3xl blur-3xl" />
               <img
                 src={heroImage}
-                alt={activeCategory === "ccm-cm" ? "Professional care manager with tablet" : "Doctor providing consultations"}
+                alt={activeCategory === "ccm-cm" ? "Professional care manager with tablet providing modern healthcare" : "Doctor providing modern healthcare consultations"}
                 className="relative rounded-3xl shadow-2xl w-full object-cover"
               />
             </div>
@@ -340,19 +366,36 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Pain Points */}
+      {/* Problem/Pain Points Section */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-12">
             <h2 className="text-4xl font-bold">Your Experience Deserves More Recognition and Reward</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {painPoints.map(({ icon: Icon, text }, index) => (
+              {[
+                {
+                  icon: DollarSign,
+                  text: "Fixed institutional salaries that don't match your experience or dedication",
+                },
+                {
+                  icon: Clock,
+                  text: "No control over your schedule or the patients you care for",
+                },
+                {
+                  icon: Heart,
+                  text: "Building relationships with patients and families, but never keeping them long-term",
+                },
+                {
+                  icon: TrendingUp,
+                  text: "Years of palliative care, nursing home, or home visit experience with nowhere to grow",
+                },
+              ].map((item, index) => (
                 <Card key={index} className="border-2 hover:shadow-lg transition-all duration-300">
                   <CardContent className="flex items-start gap-4 p-6">
                     <div className="bg-destructive/10 p-3 rounded-lg">
-                      <Icon className="h-6 w-6 text-destructive" />
+                      <item.icon className="h-6 w-6 text-destructive" />
                     </div>
-                    <p className="text-left font-medium">{text}</p>
+                    <p className="text-left font-medium">{item.text}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -363,144 +406,21 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
-           
 
-      {/* Solution Section/Bento Grid */}
-     <section className="relative py-20 overflow-hidden">
-  {/* Wavy Glassmorphism Background */}
-  <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-accent/50 via-accent/20 to-transparent backdrop-blur-lg">
-    <svg viewBox="0 0 1440 320" className="absolute bottom-0 w-full h-auto opacity-60">
-      <path
-        fill="rgba(255,255,255,0.2)"
-        stroke="rgba(255,255,255,0.4)"
-        strokeWidth="2"
-        d="M0,224L80,192C160,160,320,96,480,112C640,128,800,224,960,245.3C1120,267,1280,213,1360,186.7L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-      ></path>
-    </svg>
-  </div>
+      {/* Solution Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold">Introducing Care Manager Program</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Where Your Care Experience Becomes Your Business as a Telth Care Manager
+            </p>
+          </div>
 
-  <div className="container mx-auto px-4 relative z-10">
-    <div className="text-center space-y-4 mb-16">
-      <h2 className="text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-        Introducing Care Manager Program
-      </h2>
-      <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-        Where Your Care Experience Becomes Your Business as a Telth Care Manager
-      </p>
-    </div>
-
-    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(200px,auto)]">
-      {bentoFeatures.map((item, idx) => (
-        <motion.div
-          key={idx}
-          className={`${item.cols} rounded-2xl overflow-hidden shadow-xl transition-all duration-500 bg-white/90 border border-white/40 backdrop-blur-xl hover:scale-[1.02] hover:shadow-2xl`}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: idx * 0.1 }}
-        >
-          {!item.img ? (
-            <div className="h-full flex flex-col p-6">
-              <div className="flex items-start gap-4 mb-6">
-                {item.icon && (
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white shadow-lg animate-pulse-slow">
-                    {item.icon}
-                  </div>
-                )}
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-foreground mb-3">{item.title}</h3>
-                </div>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-lg mb-auto">{item.desc}</p>
-              {item.badges && (
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {item.badges.map((badge, bidx) => (
-                    <span
-                      key={bidx}
-                      className={`px-3 py-1 rounded-lg text-sm font-semibold ${badge.style}`}
-                    >
-                      {badge.text}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="relative h-full group">
-              <img
-                src={item.img}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="relative h-full bg-gradient-to-t from-white/95 via-white/80 to-transparent p-6 flex flex-col justify-end">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 * idx }}
-                >
-                  {item.icon && (
-                    <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-white/60 backdrop-blur-md mb-3 shadow-md">
-                      {item.icon}
-                    </div>
-                  )}
-                  <h3 className={`text-xl font-bold text-foreground mb-1`}>{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
-                </motion.div>
-              </div>
-            </div>
-          )}
-        </motion.div>
-      ))}
-    </div>
-
-    {/* Skeleton loader fallback */}
-    <AnimatePresence>
-      {false && (
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-12">
-          {[...Array(4)].map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="col-span-3 bg-white/50 animate-pulse rounded-2xl h-64 backdrop-blur-lg border border-white/30"
-            ></motion.div>
-          ))}
+          <BenefitsGrid />
         </div>
-      )}
-    </AnimatePresence>
+      </section>
 
-    <div className="mt-12 text-center">
-      <div className="inline-block px-6 py-3 bg-secondary/10 rounded-full border border-secondary/20 hover:bg-secondary/20 transition-colors duration-300 backdrop-blur-lg">
-        <p className="text-sm font-semibold text-foreground">
-          Everything included. Start with no overhead for basic care.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <style jsx>{`
-    @keyframes pulse-slow {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.05);
-        opacity: 0.9;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-    .animate-pulse-slow {
-      animation: pulse-slow 3s ease-in-out infinite;
-    }
-  `}</style>
-</section>
-
- 
       {/* Earnings Calculator */}
       <section id="calculator" className="py-20 bg-gradient-to-br from-accent/30 to-muted/30">
         <div className="container mx-auto px-4">
